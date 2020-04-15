@@ -41,7 +41,7 @@ class CopyWithGenerator extends GeneratorForAnnotation<CopyWith> {
   ) {
     final constructorInput = sortedFields.fold(
       "",
-      (r, v) => "$r ${v.type} ${v.name},",
+      (r, v) => "$r ${v.declaration} ${v.name},",
     );
     final paramsInput = sortedFields.fold(
       "",
@@ -104,8 +104,10 @@ class CopyWithGenerator extends GeneratorForAnnotation<CopyWith> {
 class _FieldInfo {
   final String name;
   final String type;
+  final String declaration;
 
   _FieldInfo(ParameterElement element)
       : this.name = element.name,
-        this.type = element.type.name;
+        this.type = element.type.name,
+        this.declaration = element.declaration.type.toString();
 }
